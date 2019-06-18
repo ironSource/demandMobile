@@ -1,0 +1,15 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            Overview
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-virtual-scroll [items]="campaigns">
+        <ion-item *virtualItem="let item">
+            {{ item.name }}
+        </ion-item>
+    </ion-virtual-scroll>
+</ion-content>

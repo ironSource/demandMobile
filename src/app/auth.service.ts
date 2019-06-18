@@ -7,6 +7,7 @@ import {of} from 'rxjs';
 
 const loginPath = `${environment.host}/partners/auth/login`;
 
+import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,8 @@ export class AuthService {
 
   constructor(
     private storage: Storage,
-    private http: HttpClient) {}
+    private http: HttpClient,
+    private splashScreen: SplashScreen) {}
 
   async getToken() {
     if (!this.currentUserToken) {
@@ -47,6 +49,11 @@ export class AuthService {
     );
   }
 
-
+  logout() {
+    this.storage.clear().then(() => {
+      this.splashScreen.show();
+      window.location.reload();
+    });
+  }
 
 }

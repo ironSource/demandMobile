@@ -1,0 +1,27 @@
+:host{
+    .advanced-notifications,
+    .basic-notifications{
+        color: #001688;
+        font-size: 14px;
+        .header{
+            background-color: #e3e3e3;
+            height: 32px;
+            padding: 2px 0px 2px 50px;
+            display: flex;
+            align-items:center;
+        }
+        .notification-containr{
+            height: 50px;
+            padding: 2px 20px 2px 50px;
+            display: flex;
+            align-items:center;
+            justify-content: space-between;
+            border-bottom: 1px solid #e3e3e3;
+        }
+    }
+
+    .button-container{
+        padding: 20px;
+    }
+
+}

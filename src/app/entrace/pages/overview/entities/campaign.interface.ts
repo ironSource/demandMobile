@@ -6,7 +6,7 @@ export interface Campaign {
     expirationDate: string;
     creationDate: string;
     active: number;
-    dailyCapTime: null;
+    dailyCapTime: string;
     origin: number;
     updateCounter: number;
     editableByDsi2: number;

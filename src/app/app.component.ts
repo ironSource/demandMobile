@@ -4,7 +4,7 @@ import {Platform} from '@ionic/angular';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {AuthService} from './auth.service';
-import {advertiserAppPages, LoginAsAppPages, adminAppPages} from './app-config';
+import {appPages} from './app-config';
 
 @Component({
   selector: 'app-root',
@@ -41,12 +41,12 @@ export class AppComponent implements OnInit {
 
   private initializeAppPages(): void {
     const user = this.authService.currentUser;
-    if (user.loginAs) {
-      this.appPages = [...LoginAsAppPages];
-    } else if (user.isAdmin) {
-      this.appPages = [...adminAppPages];
-    } else {
-      this.appPages = [...advertiserAppPages];
+    this.appPages = JSON.parse(JSON.stringify(appPages));
+    if (user.isAdmin && !user.loginAs) {
+      this.appPages[0].disable = true;
+    } else if (!user.isAdmin) {
+      this.appPages[2].disable = true;
+      this.appPages[3].disable = true;
     }
   }
 }

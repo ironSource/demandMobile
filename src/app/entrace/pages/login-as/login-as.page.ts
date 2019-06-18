@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from 'src/app/auth.service';
 import {Router} from '@angular/router';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-login-as',
@@ -9,14 +10,21 @@ import {Router} from '@angular/router';
 })
 export class LoginAsPage implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router) {}
+  form: FormGroup;
+
+  constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) {}
 
   ngOnInit() {
+    this.form = this.fb.group({
+      username: [null, Validators.required]
+    });
   }
 
   loginAs() {
-    this.authService.loginAs();
-    this.router.navigate(['/entrace']);
+    if (this.form.valid) {
+      this.authService.loginAs();
+      this.router.navigate(['/entrace']);
+    }
   }
 
 }

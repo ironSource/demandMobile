@@ -1,0 +1,42 @@
+:host{
+    .login-container{
+        font-family: 'Roboto', sans-serif;
+        height: 100%;
+        background-color: #001688;
+        padding: 50px 20px;
+        img{
+            margin-bottom: 50px;
+        }
+        ion-input{
+            height: 50px;
+            border-radius: 3px;
+            margin-bottom: 25px;
+            background-color: #ffffff;
+            padding: 15px 20px !important;
+        }
+        ion-button{
+            background-color: #3083ff;
+            height: 50px;
+            --border-radius: 3px;
+        }
+        label{
+            color: white;
+            display: block;
+            margin-bottom: 15px;
+        }
+    }
+    .button-container{
+        position: absolute;
+        top: 0;
+        left: 15px;
+        color: white;
+    }
+}
+
+:host::ng-deep{
+    input{
+        &::placeholder{
+            opacity: 0.3 !important;
+        }
+    }
+}

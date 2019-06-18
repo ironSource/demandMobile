@@ -1,28 +1,30 @@
 <ion-app>
   <ion-split-pane>
     <ion-menu type="overlay">
-      <ion-header>
-        <ion-toolbar>
-          <ion-title>Menu</ion-title>
-        </ion-toolbar>
-      </ion-header>
       <ion-content>
-        <ion-list>
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
-            <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
-              <ion-icon slot="start" [name]="p.icon"></ion-icon>
-              <ion-label>
+        <div class="header-container">
+          <ion-icon name="contact"></ion-icon>
+          <div class="header">User name</div>
+          <div>Username@usermail.com</div>
+        </div>
+        <div class="list-container">
+          <ion-menu-toggle *ngFor="let p of appPages"
+                           auto-hide="false" [ngClass]="{'disable': p.disable}">
+            <div class="item"
+                 [routerDirection]="'root'"
+                 [routerLink]="[p.url]">
+              <label>
                 {{p.title}}
-              </ion-label>
-            </ion-item>
+              </label>
+            </div>
           </ion-menu-toggle>
-          <ion-item (click)="logout()">
-              <ion-icon slot="start" name="log-out"></ion-icon>
-              <ion-label>
-                Logout
-              </ion-label>
-            </ion-item>
-        </ion-list>
+          <div class="item"
+               (click)="logout()">
+            <label>
+              Logout
+            </label>
+          </div>
+        </div>
       </ion-content>
     </ion-menu>
     <ion-router-outlet main></ion-router-outlet>

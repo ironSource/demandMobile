@@ -18,4 +18,4 @@ import {OverviewPage} from './overview.page';
   ],
   declarations: [OverviewPage]
 })
-export class HomePageModule {}
+export class OverviewModule {}

@@ -3,9 +3,9 @@ import {CampaignResponse} from './entities/campaignResponse.interface';
 import {Campaign} from './entities/campaign.interface';
 
 @Component({
-    selector: 'app-home',
-    templateUrl: 'home.page.html',
-    styleUrls: ['home.page.scss'],
+    selector: 'app-overview',
+    templateUrl: 'overview.page.html',
+    styleUrls: ['overview.page.scss'],
 })
 export class OverviewPage implements OnInit {
 

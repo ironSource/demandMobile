@@ -21,7 +21,12 @@ const routes: Routes = [
       },
       {path: 'back-office', loadChildren: './pages/back-office/back-office.module#BackOfficePageModule', canActivate: [IsAaminGuard]},
       {path: 'notifications', loadChildren: './pages/notifications/notifications.module#NotificationsPageModule'},
-      {path: 'login-as', loadChildren: './pages/login-as/login-as.module#LoginAsPageModule', canActivate: [IsAaminGuard]}
+      {path: 'login-as', loadChildren: './pages/login-as/login-as.module#LoginAsPageModule', canActivate: [IsAaminGuard]},
+      {
+        path: 'campaign/:id',
+        loadChildren: './pages/campaign-overview/campaign-overview.module#CampaignOverviewModule',
+        canActivate: [IsAdvertiserGuard]
+      }
     ]
   }
 ];

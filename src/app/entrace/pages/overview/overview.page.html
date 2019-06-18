@@ -11,7 +11,7 @@
 
 <ion-content>
     <ion-virtual-scroll [items]="campaigns">
-        <ion-item lines="full" *virtualItem="let campaign" [routerLink]="['campaign', campaign.id]">
+        <ion-item lines="full" *virtualItem="let campaign" [routerLink]="['/entrace/campaign', campaign.id]">
             <ion-avatar slot="start">
                 <img [src]="campaign.titleIcon">
             </ion-avatar>

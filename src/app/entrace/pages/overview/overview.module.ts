@@ -11,9 +11,9 @@ import {OverviewPage} from './overview.page';
         FormsModule,
         IonicModule,
         RouterModule.forChild([
-            {path: '', component: OverviewPage},
-            {path: 'campaign', redirectTo: 'campaign', pathMatch: 'full'},
-            {path: 'campaign', loadChildren: './campaign-overview/campaign-overview.module#CampaignOverviewModule'},
+            {
+                path: '', component: OverviewPage
+            }
         ])
     ],
     declarations: [OverviewPage]

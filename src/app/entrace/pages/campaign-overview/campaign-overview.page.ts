@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Campaign} from '../entities/campaign.interface';
+import {Campaign} from '../overview/entities/campaign.interface';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-overview',
@@ -41,10 +42,14 @@ export class CampaignOverviewPage implements OnInit {
         roas_7d: 0
     };
 
-    constructor() {
+    constructor(private router: Router) {
     }
 
     ngOnInit(): void {
+    }
+
+    onBack() {
+        this.router.navigate(['/entrace']);
     }
 
 

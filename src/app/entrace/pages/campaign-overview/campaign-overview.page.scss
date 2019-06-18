@@ -1,11 +1,19 @@
 ion-header {
 	ion-item {
-		color: red;
+		color: white;
 
 		div.item-inner {
 			border: 0 !important;
 		}
 	}
+	.back{
+		img{
+			width: 10px;
+			height: 16px;
+		}
+		margin-right: 10px;
+	}
+
 }
 
 ion-content {

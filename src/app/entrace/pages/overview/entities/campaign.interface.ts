@@ -18,4 +18,15 @@ export interface Campaign {
     platform: number;
     deliveryStatus: string;
     deliveryStatusId: number;
+    impressions?: number;
+    clicks?: number;
+    installs?: number;
+    spend?: number;
+    ipm?: number;
+    ecpm?: number;
+    ecpi?: number;
+    ad_revenue_7d?: number;
+    iap_revenue_7d?: number;
+    arpu_7d?: number;
+    roas_7d?: number;
 }

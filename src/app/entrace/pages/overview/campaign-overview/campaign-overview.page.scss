@@ -1,0 +1,28 @@
+ion-header {
+	ion-item {
+		color: red;
+
+		div.item-inner {
+			border: 0 !important;
+		}
+	}
+}
+
+ion-content {
+	ion-row {
+		ion-col {
+			padding: 4px;
+			div {
+				padding: 5px;
+				border: 1px solid lightgray;
+				border-radius: 3px;
+			}
+
+		}
+
+	}
+
+	ion-button {
+		margin: 7px;
+	}
+}

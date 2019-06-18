@@ -28,7 +28,7 @@ export class LoginPage implements OnInit {
     if (this.form.valid) {
       this.authService.login(this.form.value).subscribe(_ => {
         setTimeout( () => {
-          this.router.navigate(['/entrace/home']);
+          this.router.navigate(['/entrace']);
         }, 100);
       });
     }

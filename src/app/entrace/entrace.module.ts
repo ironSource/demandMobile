@@ -11,9 +11,8 @@ const routes: Routes = [
     path: '',
     component: EntracePage,
     children: [
-      {path: '', redirectTo: 'home', pathMatch: 'full'},
-      {path: 'home', loadChildren: './pages/home/home.module#HomePageModule'},
-      {path: 'list', loadChildren: './pages/list/list.module#ListPageModule'}
+      {path: '', redirectTo: 'overview', pathMatch: 'full'},
+      {path: 'overview', loadChildren: './pages/overview/overview.module#OverviewModule'}
     ]
   }
 ];

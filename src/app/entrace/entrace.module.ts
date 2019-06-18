@@ -12,7 +12,10 @@ const routes: Routes = [
     component: EntracePage,
     children: [
       {path: '', redirectTo: 'overview', pathMatch: 'full'},
-      {path: 'overview', loadChildren: './pages/overview/overview.module#OverviewModule'}
+      {path: 'overview', loadChildren: './pages/overview/overview.module#OverviewModule'},
+      {path: 'back-office', loadChildren: './pages/back-office/back-office.module#BackOfficePageModule'},
+      {path: 'notifications', loadChildren: './pages/notifications/notifications.module#NotificationsPageModule'},
+      {path: 'login-as', loadChildren: './pages/login-as/login-as.module#LoginAsPageModule'}
     ]
   }
 ];

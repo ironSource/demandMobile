@@ -10,7 +10,10 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
-  { path: 'entrace', loadChildren: './entrace/entrace.module#EntracePageModule' }
+  { path: 'entrace', loadChildren: './entrace/entrace.module#EntracePageModule' },
+  { path: 'back-office', loadChildren: './entrace/pages/back-office/back-office.module#BackOfficePageModule' },
+  { path: 'notifications', loadChildren: './entrace/pages/notifications/notifications.module#NotificationsPageModule' },
+  { path: 'login-as', loadChildren: './entrace/pages/login-as/login-as.module#LoginAsPageModule' }
 ];
 
 @NgModule({

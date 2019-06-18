@@ -3,7 +3,7 @@ import {Storage} from '@ionic/storage';
 import {HttpClient} from '@angular/common/http';
 import {environment} from 'src/environments/environment';
 import {tap} from 'rxjs/operators';
-import {of} from 'rxjs';
+import {of, Subject, BehaviorSubject} from 'rxjs';
 
 const loginPath = `${environment.host}/partners/auth/login`;
 
@@ -15,7 +15,9 @@ import {User} from './entities/user-entity';
 })
 export class AuthService {
 
+  private userStateSubject$ = new BehaviorSubject(true);
   public currentUser: User;
+  public userStateChanged$ = this.userStateSubject$.asObservable();
 
   constructor(
     private storage: Storage,
@@ -54,6 +56,11 @@ export class AuthService {
       window.location.reload();
       this.currentUser = null;
     });
+  }
+
+  loginAs() {
+    this.currentUser.loginAs = 'Advenced asfdasdfsdf';
+    this.userStateSubject$.next(true);
   }
 
 }

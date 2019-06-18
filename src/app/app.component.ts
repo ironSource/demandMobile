@@ -4,7 +4,7 @@ import {Platform} from '@ionic/angular';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {AuthService} from './auth.service';
-import {advertiserAppPages} from './app-config';
+import {advertiserAppPages, LoginAsAppPages, adminAppPages} from './app-config';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +23,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.initializeAppPages();
+    this.authService.userStateChanged$.subscribe(_ => {
+      this.initializeAppPages();
+    });
   }
 
   logout() {
@@ -38,6 +40,13 @@ export class AppComponent implements OnInit {
   }
 
   private initializeAppPages(): void {
-    this.appPages = [...advertiserAppPages];
+    const user = this.authService.currentUser;
+    if (user.loginAs) {
+      this.appPages = [...LoginAsAppPages];
+    } else if (user.isAdmin) {
+      this.appPages = [...adminAppPages];
+    } else {
+      this.appPages = [...advertiserAppPages];
+    }
   }
 }

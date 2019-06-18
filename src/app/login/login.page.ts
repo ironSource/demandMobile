@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../auth.service';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,14 +10,28 @@ import {AuthService} from '../auth.service';
 })
 export class LoginPage implements OnInit {
 
-  constructor(private authService: AuthService) {}
+  form: FormGroup;
+
+  constructor(
+    private authService: AuthService,
+    private fb: FormBuilder,
+    private router: Router) {}
 
   ngOnInit() {
+    this.form = this.fb.group({
+      username: [null, Validators.required],
+      password: [null, Validators.required]
+    });
   }
 
   login() {
-    console.log('asd');
-    this.authService.setToken('asdasd');
+    if (this.form.valid) {
+      this.authService.login(this.form.value).subscribe(_ => {
+        setTimeout( () => {
+          this.router.navigate(['/entrace/home']);
+        }, 100);
+      });
+    }
   }
 
 }

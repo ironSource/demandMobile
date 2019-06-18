@@ -1,4 +1,17 @@
 <ion-content>
-  <span>login</span>
-  <ion-button (click)="login()">login</ion-button>
+  <div class="login-container">
+    <div>
+      <form [formGroup]="form">
+          <ion-item>
+              <ion-label position="floating">Username</ion-label>
+              <ion-input formControlName="username"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Password</ion-label>
+              <ion-input type="password" formControlName="password"></ion-input>
+            </ion-item>
+      </form>
+      <ion-button  expand="full" (click)="login()">login</ion-button>
+    </div>
+  </div>
 </ion-content>

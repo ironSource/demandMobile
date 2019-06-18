@@ -3,18 +3,21 @@ import {Storage} from '@ionic/storage';
 import {HttpClient} from '@angular/common/http';
 import {environment} from 'src/environments/environment';
 import {tap} from 'rxjs/operators';
-import {of} from 'rxjs';
+import {of, Subject, BehaviorSubject} from 'rxjs';
 
 const loginPath = `${environment.host}/partners/auth/login`;
 
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
+import {User} from './entities/user-entity';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private currentUserToken: string;
+  private userStateSubject$ = new BehaviorSubject(true);
+  public currentUser: User;
+  public userStateChanged$ = this.userStateSubject$.asObservable();
 
   constructor(
     private storage: Storage,
@@ -22,15 +25,13 @@ export class AuthService {
     private splashScreen: SplashScreen) {}
 
   async getToken() {
-    if (!this.currentUserToken) {
-      const token = await this.storage.get('token');
-      this.currentUserToken = token;
-    }
-    return this.currentUserToken;
+    const token = await this.storage.get('token');
+    this.currentUser = {token, isAdmin: this.isAdmin(token)};
   }
 
-  setToken(value: string): void {
-    this.storage.set('token', value);
+  setToken(token: string): void {
+    this.storage.set('token', token);
+    this.currentUser = {token, isAdmin: this.isAdmin(token)};
   }
 
   isAdmin(token: string) {
@@ -53,7 +54,13 @@ export class AuthService {
     this.storage.clear().then(() => {
       this.splashScreen.show();
       window.location.reload();
+      this.currentUser = null;
     });
+  }
+
+  loginAs() {
+    this.currentUser.loginAs = 'Advenced asfdasdfsdf';
+    this.userStateSubject$.next(true);
   }
 
 }

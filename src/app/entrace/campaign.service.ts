@@ -21,7 +21,7 @@ export class CampaignService {
     getCampaignById(id: number): Observable<Campaign> {
         // return this.http.get<CampaignResponse>(`https://dev-php-demand1.supersonicads.com/platformjs/campaigns?campaignIds=${id}`);
 
-        const campaignReportsData = this.http.get<any>(`https://dev-php-demand1.supersonicads.com/platformjs/reports?startDate=2019-06-16&endDate=2019-06-20&breakdowns=campaign&campaign_id=${id}&metrics=impressions,clicks,installs,spend,ipm,ecpm,ecpi,ad_revenue_7d,iap_revenue_7d,arpu_7d,roas_7d,arpu_3d,roas_3d`);
+        const campaignReportsData = this.http.get<any>(`https://dev-php-demand1.supersonicads.com/platformjs/reports?startDate=2019-06-16&endDate=2019-06-20&breakdowns=campaign&campaign_id=${id}&metrics=impressions,clicks,installs,spend,ipm,ecpm,ecpi,ad_revenue_7d,iap_revenue_7d,arpu_7d,roas_7d,arpu_3d,roas_3d,retention_3d`);
         const campaignData = this.http.get<CampaignResponse>(`https://dev-php-demand1.supersonicads.com/platformjs/campaigns?campaignIds=${id}`);
 
         let campaign: Campaign;

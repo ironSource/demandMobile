@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-item lines="none">
+            <ion-avatar slot="start">
+                <img [src]="campaign.titleIcon">
+            </ion-avatar>
+            <ion-label>
+                <ion-text>
+                    <h2>{{campaign.name}}</h2>
+                </ion-text>
+                <ion-text>
+                    <h5>{{campaign.id}}</h5>
+                </ion-text>
+            </ion-label>
+            <div>
+                <ion-icon name="close"
+                          (click)="close()"></ion-icon>
+            </div>
+        </ion-item>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <div class="content-container">
+        <div class="item-container roas-container optimize-item">
+            <label class="roas-item" position="floating">Daily Budget</label>
+            <input type="text"
+                   [(ngModel)]="budget"
+                   class="roas roas-item"/>
+        </div>
+
+        <ion-button (click)="onDismiss()" expand="block">Save</ion-button>
+    </div>
+
+</ion-content>

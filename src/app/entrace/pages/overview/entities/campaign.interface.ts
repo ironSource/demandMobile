@@ -31,4 +31,5 @@ export interface Campaign {
     roas_7d?: number;
     arpu_3d?: number;
     roas_3d?: number;
+    retention_3d?: number;
 }

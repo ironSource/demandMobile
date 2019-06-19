@@ -5,6 +5,7 @@ import {IonicModule, ModalController} from '@ionic/angular';
 import {RouterModule} from '@angular/router';
 import {CampaignOverviewPage} from './campaign-overview.page';
 import {OptimizeModalPage} from './optimize-modal/optimize-modal.page';
+import {EditBudgetModalPage} from './edit-budget-modal/edit-budget-modal.page';
 
 @NgModule({
     imports: [
@@ -19,8 +20,8 @@ import {OptimizeModalPage} from './optimize-modal/optimize-modal.page';
         ])
     ],
     providers: [ModalController],
-    declarations: [CampaignOverviewPage, OptimizeModalPage],
-    entryComponents: [OptimizeModalPage]
+    declarations: [CampaignOverviewPage, OptimizeModalPage, EditBudgetModalPage],
+    entryComponents: [OptimizeModalPage, EditBudgetModalPage]
 })
 export class CampaignOverviewModule {
 }

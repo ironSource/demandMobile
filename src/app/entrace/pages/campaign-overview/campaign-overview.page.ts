@@ -3,6 +3,7 @@ import {Campaign} from '../overview/entities/campaign.interface';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ModalController} from '@ionic/angular';
 import {OptimizeModalPage} from './optimize-modal/optimize-modal.page';
+import {EditBudgetModalPage} from './edit-budget-modal/edit-budget-modal.page';
 
 @Component({
     selector: 'app-overview',
@@ -34,6 +35,24 @@ export class CampaignOverviewPage implements OnInit {
         modal.onDidDismiss().then((detail: any) => {
             if (detail !== null) {
                 console.log('The result:', detail.data);
+            }
+        });
+
+        await modal.present();
+    }
+
+    async openEditBudgetModal() {
+        const modal: HTMLIonModalElement =
+            await this.modalController.create({
+                component: EditBudgetModalPage,
+                componentProps: {
+                    campaign: this.campaign
+                }
+            });
+
+        modal.onDidDismiss().then((detail: any) => {
+            if (detail !== null) {
+                this.campaign.globalDaily = detail.data;
             }
         });
 

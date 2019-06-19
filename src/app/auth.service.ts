@@ -9,6 +9,7 @@ const loginPath = `${environment.host}/platformjs/auth/login`;
 
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {User} from './entities/user-entity';
+import {PushService} from './push.service';
 
 @Injectable({
     providedIn: 'root'
@@ -22,17 +23,20 @@ export class AuthService {
     constructor(
         private storage: Storage,
         private http: HttpClient,
-        private splashScreen: SplashScreen) {
+        private splashScreen: SplashScreen,
+        private push: PushService) {
     }
 
     async getToken() {
         const user =  JSON.parse(await this.storage.get('user'));
         this.currentUser = user;
+        this.push.pullNotifications();
     }
 
     setUser(user: User): void {
         this.storage.set('user', JSON.stringify(user));
         this.currentUser = Object.assign({}, user);
+        this.push.pullNotifications();
     }
 
     isAdmin(token: string) {

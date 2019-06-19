@@ -6,7 +6,8 @@ import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {AuthService} from './auth.service';
 import {appPages} from './app-config';
 import {User} from './entities/user-entity';
-import {LocalNotifications} from '@ionic-native/local-notifications/ngx';
+import {PushService} from './push.service';
+
 
 
 @Component({
@@ -21,8 +22,7 @@ export class AppComponent implements OnInit {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private authService: AuthService,
-    private local: LocalNotifications
+    private authService: AuthService
   ) {
     this.initializeApp();
   }
@@ -31,13 +31,6 @@ export class AppComponent implements OnInit {
     this.authService.userStateChanged$.subscribe(_ => {
       this.initializeAppPages();
     });
-    setTimeout(() => {
-      this.local.schedule({
-        id: 1,
-        text: 'Single ILocalNotification',
-        data: {secret: 1}
-      });
-    }, 3000);
   }
 
   logout() {

@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
+import {ModalController} from '@ionic/angular';
+import {AddNotificationbComponent} from './add-notificationb/add-notificationb.component';
 
 @Component({
   selector: 'app-notifications',
@@ -10,7 +12,7 @@ export class NotificationsPage implements OnInit {
 
   form: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, public modalController: ModalController) {}
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -21,12 +23,18 @@ export class NotificationsPage implements OnInit {
       advanced: this.fb.array([])
     });
     this.initLisnters();
+  }
+
+  async addNewNotification() {
+    const modal = await this.modalController.create({
+      component: AddNotificationbComponent
+    });
+    await modal.present();
+    const data: any = await modal.onDidDismiss();
+    if (data && data.data && data.data.name) {
+      (this.form.get('advanced') as FormArray).push(this.buildFormGroup({name: data.data.name, value: true}));
     }
 
-  addNewNotification() {
-    // Todo - Open modal for creating new notification;
-    // if modal success creatung new notification add it to the form array.
-    (this.form.get('advanced') as FormArray).push(this.buildFormGroup({name: 'new notification', value: true}));
   }
 
   private buildFormGroup({name, value}): FormGroup {

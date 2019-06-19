@@ -1,9 +1,91 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>optimize-modal</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>Optimize</ion-title>
+        <div>
+            <ion-icon name="close"
+                      (click)="close()"></ion-icon>
+        </div>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+    <div class="content-container">
+        <div class="item-container">
+            <div class="matured optimize-item">
+                <label>Matured cohort</label>
+                <div class="slide">
+                    <div class="selected">D3</div>
+                    <div>D7</div>
+                </div>
+            </div>
+        </div>
+
+        <ion-grid class="metrics">
+            <ion-row>
+                <ion-col>
+                    <div>
+                        <ion-label>
+                            <ion-text>
+                                <p>ROAS D3</p>
+                            </ion-text>
+                            <ion-text>
+                                <h1>{{campaign.roas_3d}}</h1>
+                            </ion-text>
+                        </ion-label>
+                    </div>
+                </ion-col>
+                <ion-col>
+                    <div>
+                        <ion-label>
+                            <ion-text>
+                                <p>ARPU D3</p>
+                            </ion-text>
+                            <ion-text>
+                                <h1>{{campaign.arpu_3d}}</h1>
+                            </ion-text>
+                        </ion-label>
+                    </div>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <div>
+                        <ion-label>
+                            <ion-text>
+                                <p>Installs</p>
+                            </ion-text>
+                            <ion-text>
+                                <h1>{{campaign.installs}}</h1>
+                            </ion-text>
+                        </ion-label>
+                    </div>
+                </ion-col>
+
+
+                <ion-col>
+                    <div>
+                        <ion-label>
+                            <ion-text>
+                                <p>Spend</p>
+                            </ion-text>
+                            <ion-text>
+                                <h1>{{campaign.spend}}</h1>
+                            </ion-text>
+                        </ion-label>
+                    </div>
+                </ion-col>
+
+            </ion-row>
+        </ion-grid>
+
+        <div class="item-container roas-container optimize-item">
+            <label class="roas-item" position="floating">ROAS Goal D3</label>
+            <input type="text"
+                   class="roas roas-item"/>
+        </div>
+
+        <ion-button expand="block">Save</ion-button>
+    </div>
 
 </ion-content>

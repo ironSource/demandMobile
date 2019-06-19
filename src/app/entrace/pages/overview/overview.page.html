@@ -10,19 +10,34 @@
 </ion-header>
 
 <ion-content>
-    <ion-virtual-scroll [items]="campaigns">
-        <ion-item lines="full" *virtualItem="let campaign" [routerLink]="['/entrace/campaign', campaign.id]">
-            <ion-avatar slot="start">
-                <img [src]="campaign.titleIcon">
-            </ion-avatar>
-            <ion-label>
-                <ion-text>
-                    <h2>{{campaign.name}}</h2>
-                </ion-text>
-                <ion-text color="medium">
-                    <h5>{{campaign.id}}</h5>
-                </ion-text>
-            </ion-label>
-        </ion-item>
-    </ion-virtual-scroll>
+
+    <div class="content-container">
+        <div class="page-title">
+            <ion-text>
+                <p>Spend</p>
+            </ion-text>
+            <ion-text>
+                <h1>3.14K</h1>
+            </ion-text>
+        </div>
+        <div class="chart-image">
+            <ion-img src="../../../../assets/images/chart-image.png"></ion-img>
+        </div>
+
+        <ion-virtual-scroll [items]="campaigns">
+            <ion-item lines="full" *virtualItem="let campaign" [routerLink]="['/entrace/campaign', campaign.id]">
+                <ion-avatar slot="start">
+                    <img [src]="campaign.titleIcon">
+                </ion-avatar>
+                <ion-label>
+                    <ion-text>
+                        <h2>{{campaign.name}}</h2>
+                    </ion-text>
+                    <ion-text color="medium">
+                        <h5>{{campaign.id}}</h5>
+                    </ion-text>
+                </ion-label>
+            </ion-item>
+        </ion-virtual-scroll>
+    </div>
 </ion-content>

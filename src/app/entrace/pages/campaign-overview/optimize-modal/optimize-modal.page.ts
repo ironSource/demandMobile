@@ -9,14 +9,19 @@ import {Campaign} from '../../overview/entities/campaign.interface';
 })
 export class OptimizeModalPage implements OnInit {
 
-  constructor(private modalController: ModalController) { }
+  constructor(private modalController: ModalController,
+              private navParams: NavParams) { }
 
   private campaign: Campaign;
   ngOnInit() {
   }
 
   ionViewWillEnter() {
-    // this.campaign = this.navParams.get('campaign');
+    this.campaign = this.navParams.get('campaign');
+  }
+
+  close() {
+    this.modalController.dismiss();
   }
 
   async onDismiss() {

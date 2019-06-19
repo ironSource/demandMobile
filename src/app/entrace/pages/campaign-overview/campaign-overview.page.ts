@@ -27,8 +27,7 @@ export class CampaignOverviewPage implements OnInit {
             await this.modalController.create({
                 component: OptimizeModalPage,
                 componentProps: {
-                    aParameter: true,
-                    otherParameter: new Date()
+                    campaign: this.campaign
                 }
             });
 
@@ -39,6 +38,10 @@ export class CampaignOverviewPage implements OnInit {
         });
 
         await modal.present();
+    }
+
+    getBudgetText(value: number) {
+        return value ? value : 'Unlimited';
     }
 
     onBack() {

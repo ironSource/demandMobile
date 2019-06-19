@@ -5,54 +5,100 @@
 // file can hold Sass mixins, functions, and placeholder classes to be imported 
 // and used throughout the application.
 
-.header-container{
-    height: 200px;
-    background-color: #3083ff;
-    padding: 50px 0px 0px 15px;
-    color:#ffffff;
-    .header{
-        font-size: 24px;
-    }
-    ion-icon{
-        color: #ffffff;
-        height: 68px;
-        width: 68px;
-    }
-    
+.header-container {
+	height: 200px;
+	background-color: #3083ff;
+	padding: 50px 0px 0px 15px;
+	color: #ffffff;
+
+	.header {
+		font-size: 24px;
+	}
+
+	ion-icon {
+		color: #ffffff;
+		height: 68px;
+		width: 68px;
+	}
+
 }
 
-.list-container{
-    background-color:#e3e3e3;
-    height:calc(100vh - 200px);
-    ion-menu-toggle{
-        &.disable{
-            pointer-events: none;
-            .item{
-                label{
-                    opacity: 0.2;
-                }
-            }
-        }
-    }
-    .item{
-        height: 50px;
-        font-size: 14px;
-        width: 100%;
-        padding: 15px 0px 15px 23px;
-        border-bottom: 1px solid rgba(0, 22, 136, 0.2);
-        color: #001688;
-        outline: none;
-    }
+.list-container {
+	background-color: #e3e3e3;
+	height: calc(100vh - 200px);
+
+	ion-menu-toggle {
+		&.disable {
+			pointer-events: none;
+
+			.item {
+				label {
+					opacity: 0.2;
+				}
+			}
+		}
+	}
+
+	.item {
+		height: 50px;
+		font-size: 14px;
+		width: 100%;
+		padding: 15px 0px 15px 23px;
+		border-bottom: 1px solid rgba(0, 22, 136, 0.2);
+		color: #001688;
+		outline: none;
+	}
 }
 
-ion-row {
-    ion-col{
-        ion-text {
-            p {
-                font-size: 12px!important;
-            }
-        }
-    }
+
+ion-content {
+
+	div.content-container {
+		margin: 0 15px;
+		color: #001688;
+	}
+
+	ion-grid {
+		&.metrics {
+			padding: 5px 0;
+			margin: 0 -5px;
+			ion-row {
+				ion-col {
+					ion-text {
+						p {
+							font-size: 12px !important;
+						}
+					}
+
+					padding: 4px;
+
+					div {
+						padding: 5px;
+						border: 1px solid #e3e3e3;
+						border-radius: 3px;
+						background-color: #f2f2f2;
+					}
+
+				}
+
+			}
+		}
+	}
+}
+
+:root {
+	font-family: Roboto;
+
+	ion-content {
+		div.page-title {
+			text-align: center;
+		}
+	}
+
+	div {
+		&.chart-image {
+		}
+	}
 }
 
 

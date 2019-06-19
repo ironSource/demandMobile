@@ -1,3 +1,6 @@
+ion-content {
+	margin: 0 10px;
+}
 ion-header {
 	ion-item {
 		color: white;
@@ -14,28 +17,4 @@ ion-header {
 		margin-right: 10px;
 	}
 
-}
-
-ion-content {
-	div.page-title {
-		text-align: center;
-	}
-
-	ion-row {
-		ion-col {
-			padding: 4px;
-
-			div {
-				padding: 5px;
-				border: 1px solid lightgray;
-				border-radius: 3px;
-			}
-
-		}
-
-	}
-
-	ion-button {
-		margin: 8px;
-	}
 }

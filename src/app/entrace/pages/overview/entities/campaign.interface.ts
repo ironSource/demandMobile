@@ -29,4 +29,6 @@ export interface Campaign {
     iap_revenue_7d?: number;
     arpu_7d?: number;
     roas_7d?: number;
+    arpu_3d?: number;
+    roas_3d?: number;
 }

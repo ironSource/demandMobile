@@ -26,6 +26,14 @@
 </ion-header>
 
 <ion-content>
+    <div class="page-title">
+        <ion-text>
+            <p>Spend</p>
+        </ion-text>
+        <ion-text>
+            <h1>3.14K</h1>
+        </ion-text>
+    </div>
     <ion-grid>
         <ion-row>
             <ion-col>
@@ -47,7 +55,7 @@
                             <p>Total Budget</p>
                         </ion-text>
                         <ion-text>
-                            <h1>{{campaign.globalDaily}}</h1>
+                            <h1>{{campaign.globalTotal}}</h1>
                         </ion-text>
                     </ion-label>
                 </div>
@@ -61,7 +69,7 @@
                             <p>Installs</p>
                         </ion-text>
                         <ion-text>
-                            <h1>535K</h1>
+                            <h1>{{campaign.installs}}</h1>
                         </ion-text>
                     </ion-label>
                 </div>
@@ -75,7 +83,7 @@
                             <p>Impressions</p>
                         </ion-text>
                         <ion-text>
-                            <h1>300K</h1>
+                            <h1>{{campaign.impressions}}</h1>
                         </ion-text>
                     </ion-label>
                 </div>
@@ -84,6 +92,6 @@
         </ion-row>
     </ion-grid>
 
-    <ion-button expand="block">Optimize</ion-button>
+    <ion-button (click)="openOptimizeModal" expand="block">Optimize</ion-button>
 
 </ion-content>

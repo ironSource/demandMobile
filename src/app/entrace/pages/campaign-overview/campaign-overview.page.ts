@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Campaign} from '../overview/entities/campaign.interface';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ModalController} from '@ionic/angular';
+import {OptimizeModalPage} from './optimize-modal/optimize-modal.page';
 
 @Component({
     selector: 'app-overview',
@@ -9,43 +11,34 @@ import {Router} from '@angular/router';
 })
 export class CampaignOverviewPage implements OnInit {
 
-    public campaign: Campaign = {
-        name: 'Some campaign name',
-        id: 4296607,
-        titleId: 494879,
-        activationDate: '2019-06-13T14:41:00.000Z',
-        expirationDate: '0000-00-00 00:00:00',
-        creationDate: '2019-06-13T14:40:59.000Z',
-        active: 1,
-        dailyCapTime: null,
-        origin: 5,
-        updateCounter: 0,
-        editableByDsi2: 1,
-        globalTotal: 0,
-        globalDaily: 0,
-        payout: 1,
-        paymentModel: 1,
-        titleIcon: 'https://is4-ssl.mzstatic.com/image/thumb/Purple113/v4/0e/b6/51/0eb65141-4fb1-7d70-c8ab-e70ef11cc1c0/source/512x512bb.jpg',
-        platform: 1,
-        deliveryStatus: 'Pending approval',
-        deliveryStatusId: 2,
-        impressions: 0,
-        clicks: 0,
-        installs: 0,
-        spend: 0,
-        ipm: 0,
-        ecpm: 0,
-        ecpi: 0,
-        ad_revenue_7d: 0,
-        iap_revenue_7d: 0,
-        arpu_7d: 0,
-        roas_7d: 0
-    };
+    public campaign: Campaign;
 
-    constructor(private router: Router) {
+    constructor(private router: Router,
+                private route: ActivatedRoute,
+                private modalController: ModalController) {
+        this.campaign = route.snapshot.data.campaign;
     }
 
     ngOnInit(): void {
+    }
+
+    async openOptimizeModal() {
+        const modal: HTMLIonModalElement =
+            await this.modalController.create({
+                component: OptimizeModalPage,
+                componentProps: {
+                    aParameter: true,
+                    otherParameter: new Date()
+                }
+            });
+
+        modal.onDidDismiss().then((detail: any) => {
+            if (detail !== null) {
+                console.log('The result:', detail.data);
+            }
+        });
+
+        await modal.present();
     }
 
     onBack() {

@@ -17,9 +17,14 @@ ion-header {
 }
 
 ion-content {
+	div.page-title {
+		text-align: center;
+	}
+
 	ion-row {
 		ion-col {
 			padding: 4px;
+
 			div {
 				padding: 5px;
 				border: 1px solid lightgray;
@@ -31,6 +36,6 @@ ion-content {
 	}
 
 	ion-button {
-		margin: 7px;
+		margin: 8px;
 	}
 }

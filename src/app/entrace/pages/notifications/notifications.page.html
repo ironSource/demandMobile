@@ -4,11 +4,51 @@
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
         <ion-title>
-            Notifications
+            Notifications center
         </ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
+    <form [formGroup]="form">
+        <div class="basic-notifications">
+            <div class="header">
+                <span>Basic notifications</span>
+            </div>
 
+            <div formArrayName="basic">
+                <div class="notification"
+                     *ngFor="let notification of form.get('basic').controls; let i = index">
+                    <div class="notification-containr"
+                         [formGroup]="form.get('basic').controls[i]">
+                        <label>{{notification.get('name').value}}</label>
+                        <ion-toggle formControlName="value"></ion-toggle>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="advanced-notifications">
+            <div class="header">
+                <span>Advanced notifications</span>
+            </div>
+
+            <div formArrayName="advanced">
+                <div class="notification"
+                     *ngFor="let notification of form.get('advanced').controls; let i = index">
+                    <div class="notification-containr"
+                         [formGroup]="form.get('advanced').controls[i]">
+                        <label>{{notification.get('name').value}}</label>
+                        <ion-toggle formControlName="value"></ion-toggle>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="button-container">
+            <ion-button (click)="addNewNotification()" expand="block">Add Notification</ion-button>
+        </div>
+    </form>
 </ion-content>

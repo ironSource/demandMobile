@@ -1,0 +1,92 @@
+:host{
+    .container{
+        font-family: Roboto;
+        color: #021074;
+        padding: 20px;
+        .header{
+            display: flex;
+            font-size: 20px;
+            justify-content: space-between;
+            border-bottom: 1px solid #e3e3e3;
+            margin-bottom: 25px;
+            label{
+                font-weight: 600;
+                display: block;
+                margin-bottom: 20px;
+            }
+            ion-icon{
+                color:#95a6b8;
+                width: 27px;
+                height: 27px;
+            }
+        }
+        ion-item{
+            margin-bottom: 15px;
+            font-size: 16px;
+            color: #021074 !important;
+        }
+
+        .name-container{
+            font-size: 16px;
+            margin-bottom: 15px;
+            label{
+                margin-bottom: 5px;
+                display: block;
+            }
+ 
+        }
+    }
+    .slide{
+        background-color: #f2f2f2;
+        border-radius: 3px;
+        height:40px;
+        display: flex;
+        border: solid 1px #e3e3e3;
+        div{
+            flex: 1 1 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &.selected{
+                background-color: #3083ff;
+                border-radius: 3px;
+                color: white;
+            }
+        }
+   
+    }
+    .item-container{
+        margin-bottom: 15px;
+        label{
+            margin-bottom: 5px;
+            display: block;
+        }
+        &.a{
+            padding-right: 10px;
+        }
+    }
+
+
+    ion-select{
+        background-color: #f2f2f2;
+        border-radius: 3px;
+        border: solid 1px #e3e3e3;
+        padding-right: 5px;
+    }
+
+    .frequesncy{
+        display: flex;
+        div{
+            flex: 1 1;
+        }
+    }
+
+    input.name{
+        display: block;
+        height: 40px;
+        width: 100%;
+        border: solid 1px #e3e3e3;
+        padding: 10px 12px;
+        outline: none;
+    }
+}

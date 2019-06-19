@@ -2,10 +2,10 @@
   <ion-split-pane>
     <ion-menu type="overlay">
       <ion-content>
-        <div class="header-container">
+        <div class="header-container" *ngIf="user">
           <ion-icon name="contact"></ion-icon>
-          <div class="header">User name</div>
-          <div>Username@usermail.com</div>
+          <div class="header">{{user.username}}</div>
+          <div>{{user.user_email}}</div>
         </div>
         <div class="list-container">
           <ion-menu-toggle *ngFor="let p of appPages"

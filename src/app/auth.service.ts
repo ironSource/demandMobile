@@ -48,7 +48,7 @@ export class AuthService {
         return this.http.post(loginPath, {username, password})
             .pipe(
                 tap((val: any) => {
-                    this.setUser(val);
+                    this.setUser({...val, username: username.split('@')[0]});
                     this.userStateSubject$.next(true);
                 })
             );

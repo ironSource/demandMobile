@@ -5,6 +5,7 @@ import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {AuthService} from './auth.service';
 import {appPages} from './app-config';
+import {User} from './entities/user-entity';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,7 @@ import {appPages} from './app-config';
 })
 export class AppComponent implements OnInit {
   public appPages;
+  user: User;
 
   constructor(
     private platform: Platform,
@@ -40,11 +42,11 @@ export class AppComponent implements OnInit {
   }
 
   private initializeAppPages(): void {
-    const user = this.authService.currentUser;
+    this.user = this.authService.currentUser;
     this.appPages = JSON.parse(JSON.stringify(appPages));
-    if (user && user.isAdmin && !user.loginAs) {
+    if (this.user && this.user.isAdmin && !this.user.loginAs) {
       this.appPages[0].disable = true;
-    } else if (user && !user.isAdmin) {
+    } else if (this.user && !this.user.isAdmin) {
       this.appPages[2].disable = true;
       this.appPages[3].disable = true;
     }

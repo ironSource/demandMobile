@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Routes, RouterModule} from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 import {IonicModule} from '@ionic/angular';
 
@@ -22,6 +23,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [LoginPage]
+  declarations: [LoginPage],
+  providers: [ToastController]
 })
 export class LoginPageModule {}

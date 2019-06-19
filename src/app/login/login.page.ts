@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../auth.service';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import {ToastController} from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ export class LoginPage implements OnInit {
   constructor(
     private authService: AuthService,
     private fb: FormBuilder,
-    private router: Router) {}
+    private router: Router,
+    public toastController: ToastController) {}
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -27,10 +29,20 @@ export class LoginPage implements OnInit {
   login() {
     if (this.form.valid) {
       this.authService.login(this.form.value).subscribe(_ => {
-        setTimeout( () => {
+        setTimeout(() => {
           this.router.navigate(['/entrace']);
         }, 100);
-      });
+      },
+        err => {
+          (async () => {
+            const toast = await this.toastController.create({
+              message: 'Faild to login',
+              duration: 2000
+            });
+            toast.present();
+          })();
+
+        });
     }
   }
 

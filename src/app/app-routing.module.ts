@@ -9,7 +9,8 @@ const routes: Routes = [
     loadChildren: './entrace/entrace.module#EntracePageModule',
     canActivate: [AuthGuard]
   },
-  { path: 'login', loadChildren: './login/login.module#LoginPageModule' }
+  { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
+  { path: 'optimize-modal', loadChildren: './entrace/pages/campaign-overview/optimize-modal/optimize-modal.module#OptimizeModalPageModule' }
 ];
 
 @NgModule({

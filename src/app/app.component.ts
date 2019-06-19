@@ -42,9 +42,9 @@ export class AppComponent implements OnInit {
   private initializeAppPages(): void {
     const user = this.authService.currentUser;
     this.appPages = JSON.parse(JSON.stringify(appPages));
-    if (user.isAdmin && !user.loginAs) {
+    if (user && user.isAdmin && !user.loginAs) {
       this.appPages[0].disable = true;
-    } else if (!user.isAdmin) {
+    } else if (user && !user.isAdmin) {
       this.appPages[2].disable = true;
       this.appPages[3].disable = true;
     }

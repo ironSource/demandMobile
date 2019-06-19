@@ -24,6 +24,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var routes = [
     {
         path: '',
@@ -42,7 +43,8 @@ var LoginPageModule = /** @class */ (function () {
                 _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"],
                 _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forChild(routes)
             ],
-            declarations: [_login_page__WEBPACK_IMPORTED_MODULE_6__["LoginPage"]]
+            declarations: [_login_page__WEBPACK_IMPORTED_MODULE_6__["LoginPage"]],
+            providers: [_ionic_angular__WEBPACK_IMPORTED_MODULE_5__["ToastController"]]
         })
     ], LoginPageModule);
     return LoginPageModule;
@@ -89,16 +91,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../auth.service */ "./src/app/auth.service.ts");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+
 
 
 
 
 
 var LoginPage = /** @class */ (function () {
-    function LoginPage(authService, fb, router) {
+    function LoginPage(authService, fb, router, toastController) {
         this.authService = authService;
         this.fb = fb;
         this.router = router;
+        this.toastController = toastController;
     }
     LoginPage.prototype.ngOnInit = function () {
         this.form = this.fb.group({
@@ -113,6 +118,22 @@ var LoginPage = /** @class */ (function () {
                 setTimeout(function () {
                     _this.router.navigate(['/entrace']);
                 }, 100);
+            }, function (err) {
+                (function () { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                    var toast;
+                    return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                        switch (_a.label) {
+                            case 0: return [4 /*yield*/, this.toastController.create({
+                                    message: 'Faild to login',
+                                    duration: 2000
+                                })];
+                            case 1:
+                                toast = _a.sent();
+                                toast.present();
+                                return [2 /*return*/];
+                        }
+                    });
+                }); })();
             });
         }
     };
@@ -124,7 +145,8 @@ var LoginPage = /** @class */ (function () {
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormBuilder"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["ToastController"]])
     ], LoginPage);
     return LoginPage;
 }());

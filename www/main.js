@@ -835,6 +835,8 @@ module.exports = webpackAsyncContext;
 var map = {
 	"./entrace/entrace.module": [
 		"./src/app/entrace/entrace.module.ts",
+		"default~entrace-entrace-module~pages-notifications-notifications-module",
+		"common",
 		"entrace-entrace-module"
 	],
 	"./login/login.module": [
@@ -855,6 +857,8 @@ var map = {
 	],
 	"./pages/notifications/notifications.module": [
 		"./src/app/entrace/pages/notifications/notifications.module.ts",
+		"default~entrace-entrace-module~pages-notifications-notifications-module",
+		"common",
 		"pages-notifications-notifications-module"
 	],
 	"./pages/overview/overview.module": [
@@ -871,7 +875,7 @@ function webpackAsyncContext(req) {
 			throw e;
 		});
 	}
-	return __webpack_require__.e(ids[1]).then(function() {
+	return Promise.all(ids.slice(1).map(__webpack_require__.e)).then(function() {
 		var id = ids[0];
 		return __webpack_require__(id);
 	});
@@ -972,7 +976,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-app>\n  <ion-split-pane>\n    <ion-menu type=\"overlay\">\n      <ion-content>\n        <div class=\"header-container\">\n          <ion-icon name=\"contact\"></ion-icon>\n          <div class=\"header\">User name</div>\n          <div>Username@usermail.com</div>\n        </div>\n        <div class=\"list-container\">\n          <ion-menu-toggle *ngFor=\"let p of appPages\"\n                           auto-hide=\"false\" [ngClass]=\"{'disable': p.disable}\">\n            <div class=\"item\"\n                 [routerDirection]=\"'root'\"\n                 [routerLink]=\"[p.url]\">\n              <label>\n                {{p.title}}\n              </label>\n            </div>\n          </ion-menu-toggle>\n          <div class=\"item\"\n               (click)=\"logout()\">\n            <label>\n              Logout\n            </label>\n          </div>\n        </div>\n      </ion-content>\n    </ion-menu>\n    <ion-router-outlet main></ion-router-outlet>\n  </ion-split-pane>\n</ion-app>"
+module.exports = "<ion-app>\n  <ion-split-pane>\n    <ion-menu type=\"overlay\">\n      <ion-content>\n        <div class=\"header-container\" *ngIf=\"user\">\n          <ion-icon name=\"contact\"></ion-icon>\n          <div class=\"header\">{{user.username}}</div>\n          <div>{{user.user_email}}</div>\n        </div>\n        <div class=\"list-container\">\n          <ion-menu-toggle *ngFor=\"let p of appPages\"\n                           auto-hide=\"false\" [ngClass]=\"{'disable': p.disable}\">\n            <div class=\"item\"\n                 [routerDirection]=\"'root'\"\n                 [routerLink]=\"[p.url]\">\n              <label>\n                {{p.title}}\n              </label>\n            </div>\n          </ion-menu-toggle>\n          <div class=\"item\"\n               (click)=\"logout()\">\n            <label>\n              Logout\n            </label>\n          </div>\n        </div>\n      </ion-content>\n    </ion-menu>\n    <ion-router-outlet main></ion-router-outlet>\n  </ion-split-pane>\n</ion-app>"
 
 /***/ }),
 
@@ -993,6 +997,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
 /* harmony import */ var _auth_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./auth.service */ "./src/app/auth.service.ts");
 /* harmony import */ var _app_config__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app-config */ "./src/app/app-config.ts");
+/* harmony import */ var _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic-native/local-notifications/ngx */ "./node_modules/@ionic-native/local-notifications/ngx/index.js");
+
 
 
 
@@ -1001,11 +1007,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var AppComponent = /** @class */ (function () {
-    function AppComponent(platform, splashScreen, statusBar, authService) {
+    function AppComponent(platform, splashScreen, statusBar, authService, local) {
         this.platform = platform;
         this.splashScreen = splashScreen;
         this.statusBar = statusBar;
         this.authService = authService;
+        this.local = local;
         this.initializeApp();
     }
     AppComponent.prototype.ngOnInit = function () {
@@ -1013,6 +1020,13 @@ var AppComponent = /** @class */ (function () {
         this.authService.userStateChanged$.subscribe(function (_) {
             _this.initializeAppPages();
         });
+        setTimeout(function () {
+            _this.local.schedule({
+                id: 1,
+                text: 'Single ILocalNotification',
+                data: { secret: 1 }
+            });
+        }, 1000);
     };
     AppComponent.prototype.logout = function () {
         this.authService.logout();
@@ -1025,12 +1039,12 @@ var AppComponent = /** @class */ (function () {
         });
     };
     AppComponent.prototype.initializeAppPages = function () {
-        var user = this.authService.currentUser;
+        this.user = this.authService.currentUser;
         this.appPages = JSON.parse(JSON.stringify(_app_config__WEBPACK_IMPORTED_MODULE_6__["appPages"]));
-        if (user.isAdmin && !user.loginAs) {
+        if (this.user && this.user.isAdmin && !this.user.loginAs) {
             this.appPages[0].disable = true;
         }
-        else if (!user.isAdmin) {
+        else if (this.user && !this.user.isAdmin) {
             this.appPages[2].disable = true;
             this.appPages[3].disable = true;
         }
@@ -1043,7 +1057,8 @@ var AppComponent = /** @class */ (function () {
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"],
             _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"],
             _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"],
-            _auth_service__WEBPACK_IMPORTED_MODULE_5__["AuthService"]])
+            _auth_service__WEBPACK_IMPORTED_MODULE_5__["AuthService"],
+            _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_7__["LocalNotifications"]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -1077,6 +1092,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _interceptors_jwt_interceptor__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./interceptors/jwt.interceptor */ "./src/app/interceptors/jwt.interceptor.ts");
 /* harmony import */ var _interceptors_error_interceptor__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./interceptors/error.interceptor */ "./src/app/interceptors/error.interceptor.ts");
 /* harmony import */ var _auth_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./auth.service */ "./src/app/auth.service.ts");
+/* harmony import */ var _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @ionic-native/local-notifications/ngx */ "./node_modules/@ionic-native/local-notifications/ngx/index.js");
+
 
 
 
@@ -1116,6 +1133,7 @@ var AppModule = /** @class */ (function () {
                 { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_10__["HTTP_INTERCEPTORS"], useClass: _interceptors_jwt_interceptor__WEBPACK_IMPORTED_MODULE_11__["JwtInterceptor"], multi: true },
                 { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_10__["HTTP_INTERCEPTORS"], useClass: _interceptors_error_interceptor__WEBPACK_IMPORTED_MODULE_12__["ErrorInterceptor"], multi: true },
                 { provide: _angular_core__WEBPACK_IMPORTED_MODULE_1__["APP_INITIALIZER"], useFactory: init_app, deps: [_auth_service__WEBPACK_IMPORTED_MODULE_13__["AuthService"]], multi: true },
+                _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_14__["LocalNotifications"]
             ],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]]
         })
@@ -1151,7 +1169,7 @@ var AuthGuard = /** @class */ (function () {
         this.authService = authService;
     }
     AuthGuard.prototype.canActivate = function (route, state) {
-        var token = this.authService.currentUser.token;
+        var token = this.authService.currentUser ? this.authService.currentUser.token : null;
         if (!token) {
             this.router.navigate(['/login']);
             return false;
@@ -1196,7 +1214,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var loginPath = src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].host + "/partners/auth/login";
+var loginPath = src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].host + "/platformjs/auth/login";
 
 var AuthService = /** @class */ (function () {
     function AuthService(storage, http, splashScreen) {
@@ -1208,21 +1226,23 @@ var AuthService = /** @class */ (function () {
     }
     AuthService.prototype.getToken = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var token;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.storage.get('token')];
+            var user, _a, _b;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _b = (_a = JSON).parse;
+                        return [4 /*yield*/, this.storage.get('user')];
                     case 1:
-                        token = _a.sent();
-                        this.currentUser = { token: token, isAdmin: this.isAdmin(token) };
+                        user = _b.apply(_a, [_c.sent()]);
+                        this.currentUser = user;
                         return [2 /*return*/];
                 }
             });
         });
     };
-    AuthService.prototype.setToken = function (token) {
-        this.storage.set('token', token);
-        this.currentUser = { token: token, isAdmin: this.isAdmin(token) };
+    AuthService.prototype.setUser = function (user) {
+        this.storage.set('user', JSON.stringify(user));
+        this.currentUser = Object.assign({}, user);
     };
     AuthService.prototype.isAdmin = function (token) {
         var base64 = atob(token);
@@ -1232,11 +1252,14 @@ var AuthService = /** @class */ (function () {
         var _this = this;
         var username = _a.username, password = _a.password;
         var mockRequest$ = Object(rxjs__WEBPACK_IMPORTED_MODULE_6__["of"])({
-            token: 'MGIxYTBjMDNiZWY5OjE1NjM0NDYxNzI6N2ZkYTAzMmIwMGM0NjVkZDRjMjMzOGQ0NTEwMmM4Yjg=',
+            token: 'MWMwYzBiZmIzYmMxOjE1NjM0NTk2MDA6MDAyOGYxOWNhMjU4ZmFhMWIyYWM3N2VjNDRkMzI0MWM=',
             expiration: '2019-07-18'
         });
-        var request$ = this.http.post(loginPath, { username: username, password: password });
-        return mockRequest$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (val) { return _this.setToken("Advanced " + val.token); }));
+        return this.http.post(loginPath, { username: username, password: password })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (val) {
+            _this.setUser(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, val, { username: username.split('@')[0] }));
+            _this.userStateSubject$.next(true);
+        }));
     };
     AuthService.prototype.logout = function () {
         var _this = this;
@@ -1290,12 +1313,11 @@ var ErrorInterceptor = /** @class */ (function () {
         this.authService = authService;
     }
     ErrorInterceptor.prototype.intercept = function (req, next) {
-        var _this = this;
         return next.handle(req)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(function (error, caught) {
             if (error.status === 401) {
                 // auto logout if 401 response returned from api
-                _this.authService.logout();
+                //  this.authService.logout();
             }
             var err = (error.error && error.error.message) || error.statusText;
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["throwError"])(err);
@@ -1333,13 +1355,15 @@ var JwtInterceptor = /** @class */ (function () {
         this.authService = authService;
     }
     JwtInterceptor.prototype.intercept = function (req, next) {
-        var token = this.authService.currentUser.token;
-        if (token) {
-            req = req.clone({
-                setHeaders: {
-                    Authorization: token
-                }
-            });
+        if (this.authService.currentUser) {
+            var token = this.authService.currentUser.token;
+            if (token) {
+                req = req.clone({
+                    setHeaders: {
+                        Authorization: token
+                    }
+                });
+            }
         }
         return next.handle(req);
     };

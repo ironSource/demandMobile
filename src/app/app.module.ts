@@ -14,6 +14,8 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {JwtInterceptor} from './interceptors/jwt.interceptor';
 import {ErrorInterceptor} from './interceptors/error.interceptor';
 import {AuthService} from './auth.service';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+
 
 export function init_app(authService: AuthService) {
   return () => authService.getToken();
@@ -36,6 +38,7 @@ export function init_app(authService: AuthService) {
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     { provide: APP_INITIALIZER, useFactory: init_app, deps: [AuthService], multi: true },
+    LocalNotifications
   ],
   bootstrap: [AppComponent]
 })

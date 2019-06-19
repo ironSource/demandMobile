@@ -20,6 +20,13 @@ export class NotificationsPage implements OnInit {
       ]),
       advanced: this.fb.array([])
     });
+    this.initLisnters();
+    }
+
+  addNewNotification() {
+    // Todo - Open modal for creating new notification;
+    // if modal success creatung new notification add it to the form array.
+    (this.form.get('advanced') as FormArray).push(this.buildFormGroup({name: 'new notification', value: true}));
   }
 
   private buildFormGroup({name, value}): FormGroup {
@@ -27,6 +34,11 @@ export class NotificationsPage implements OnInit {
       name: [name],
       value: [value]
     });
+  }
+
+  private initLisnters() {
+    this.form.get('basic').valueChanges.subscribe(console.log);
+    // Todo - send http request to update notification status
   }
 
 }

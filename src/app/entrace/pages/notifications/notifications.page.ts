@@ -14,6 +14,7 @@ export class NotificationsPage implements OnInit {
 
   constructor(private fb: FormBuilder, public modalController: ModalController) {}
 
+
   ngOnInit() {
     this.form = this.fb.group({
       basic: this.fb.array([

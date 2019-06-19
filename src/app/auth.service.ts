@@ -49,6 +49,7 @@ export class AuthService {
             .pipe(
                 tap((val: any) => {
                     this.setUser(val);
+                    this.userStateSubject$.next(true);
                 })
             );
     }

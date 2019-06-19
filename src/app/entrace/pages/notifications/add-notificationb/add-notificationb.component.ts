@@ -1,7 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ModalController} from '@ionic/angular';
-import {FormGroup, FormBuilder} from '@angular/forms';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {BehaviorSubject} from 'rxjs';
+import {CampaignService} from 'src/app/entrace/campaign.service';
+import {map} from 'rxjs/operators';
+import {CampaignResponse} from '../../overview/entities/campaignResponse.interface';
 
 @Component({
   selector: 'app-add-notificationb',
@@ -11,14 +14,18 @@ import {BehaviorSubject} from 'rxjs';
 export class AddNotificationbComponent implements OnInit {
 
   form: FormGroup;
-  campaigns$ = new BehaviorSubject<any>([{name: 'campaign 1', value: 1}]);
+  campaigns$;
 
-  constructor(private modalController: ModalController, private fb: FormBuilder) {}
+  constructor(private modalController: ModalController, private fb: FormBuilder, private campaignService: CampaignService) {}
 
   ngOnInit() {
     this.form = this.fb.group({
-      name: [null]
+      name: [null, Validators.required]
     });
+    this.campaigns$ = this.campaignService.getCampaigns()
+      .pipe(
+        map((value: CampaignResponse) => value.campaigns.map(item => ({name: item.name, value: item.id})))
+      );
   }
 
   close() {

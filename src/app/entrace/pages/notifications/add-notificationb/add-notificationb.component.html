@@ -34,6 +34,7 @@
           <ion-select-option value="1">Impressions</ion-select-option>
           <ion-select-option value="2">Installs</ion-select-option>
           <ion-select-option value="3">Clicks</ion-select-option>
+          <ion-select-option value="4">Spent</ion-select-option>
         </ion-select>
       </div>
 
@@ -72,6 +73,6 @@
       </div>
     </form>
 
-    <ion-button (click)="dismiss(form.value)" expand="block">Save</ion-button>
+    <ion-button [disabled]="form.invalid" (click)="dismiss(form.value)" expand="block">Save</ion-button>
   </div>
 </div>
